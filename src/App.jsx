@@ -12,9 +12,10 @@ const App = () => {
     return `survey-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
   };
 
+
   survey.onComplete.add((sender, options) => {
-    const res = JSON.stringify(sender.data, null, 3);  
-    const uniqueId = generateUniqueId();  
+    const res = JSON.stringify(sender.data, null, 3);
+    const uniqueId = generateUniqueId();
     localStorage.setItem(uniqueId, res);
 
     console.log(`Survey result saved with ID: ${uniqueId}`);
