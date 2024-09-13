@@ -1,4 +1,4 @@
-// import { Survey } from 'survey-core';
+
 
 const surveyJson = {
     pages: [
@@ -81,9 +81,8 @@ const surveyJson = {
     showPrevButton: true,
     firstPageIsStarted: true,
     startSurveyText: 'Start Survey',
-    completedHtml: 'Thank you for your feedback!',
     showPreviewBeforeComplete: 'showAnsweredQuestions',
-    onBeforeComplete: true
+    showCompletedPage: false
 };
 
 export default surveyJson;
