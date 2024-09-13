@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors'; // Import the cors package
 
 const app = express();
-const port = 4000;
+const port = 5173;
 
 // Create a connection to the database
 const connection = mysql.createConnection({

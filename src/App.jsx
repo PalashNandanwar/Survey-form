@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import { Survey } from 'survey-react-ui';
@@ -7,29 +8,16 @@ import './App.css';
 const App = () => {
   const survey = new Model(surveyJson);
 
-  survey.onComplete.add(function (sender, options) {
-    // Display the "Saving..." message (pass a string value to display a custom message)
-    options.showSaveInProgress();
+  const generateUniqueId = () => {
+    return `survey-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+  };
 
-    fetch('http://localhost:4000/submit-survey', { // Use fetch instead of XMLHttpRequest
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      },
-      body: JSON.stringify(sender.data)
-    })
-      .then(response => response.json()) // Parse response as JSON
-      .then(data => {
-        if (data.success) { // Check for success message from backend
-          options.showSaveSuccess();
-        } else {
-          options.showSaveError(data.error || 'Error saving survey data'); // Display specific error
-        }
-      })
-      .catch(error => {
-        console.error('Error submitting survey:', error);
-        options.showSaveError('Error saving survey data'); // Display generic error
-      });
+  survey.onComplete.add((sender, options) => {
+    const res = JSON.stringify(sender.data, null, 3);  
+    const uniqueId = generateUniqueId();  
+    localStorage.setItem(uniqueId, res);
+
+    console.log(`Survey result saved with ID: ${uniqueId}`);
   });
 
   return (
